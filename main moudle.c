@@ -3,35 +3,35 @@
 #include<string.h>
 #include <malloc.h>
 #include<ctype.h>
-//½á¹¹Ìå
-struct _BookInf //Êé±¾ĞÅÏ¢
+//ç»“æ„ä½“
+struct _BookInf //ä¹¦æœ¬ä¿¡æ¯
 {
-	char BookName[100];//ÊéÃû
-	char Writer[50];//×÷Õß
-	int PressNum;//³ö°æÉç
-	char BookID[13];//ÊéºÅ
-	int Prize;//¼Û¸ñ
-	char IndexNum[50];//Ë÷ÒıºÅ
-	int Stock;//Ê£Óà
+	char BookName[100];//ä¹¦å
+	char Writer[50];//ä½œè€…
+	int PressNum;//å‡ºç‰ˆç¤¾
+	char BookID[13];//ä¹¦å·
+	int Prize;//ä»·æ ¼
+	char IndexNum[50];//ç´¢å¼•å·
+	int Stock;//å‰©ä½™
 	struct BookInf *Next;
-}BookInf[101];//<------------------------------------ÖÁ¶àÊäÈë99¸öÊı¾İ 
-struct RBookInf //Êé±¾ĞÅÏ¢<--------------------------ÅÅĞò×¨ÓÃ½á¹¹Ìå 
+}BookInf[101];//<------------------------------------è‡³å¤šè¾“å…¥99ä¸ªæ•°æ® 
+struct RBookInf //ä¹¦æœ¬ä¿¡æ¯<--------------------------æ’åºä¸“ç”¨ç»“æ„ä½“ 
 	{
-		char BookName[100];//ÊéÃû
-		char Writer[50];//×÷Õß
-		int PressNum;//³ö°æÉç
-		char BookID[13];//ÊéºÅ
-		int Prize;//¼Û¸ñ
-		char IndexNum[50];//Ë÷ÒıºÅ
-		int Stock;//Ê£Óà
-	}RBookInf[101];//<------------------------------ÖÁ¶àÊäÈë99¸öÊı¾İ
-struct _PressInf//<------------------------------³ö°æÉçĞÅÏ¢½á¹¹Ìå 
+		char BookName[100];//ä¹¦å
+		char Writer[50];//ä½œè€…
+		int PressNum;//å‡ºç‰ˆç¤¾
+		char BookID[13];//ä¹¦å·
+		int Prize;//ä»·æ ¼
+		char IndexNum[50];//ç´¢å¼•å·
+		int Stock;//å‰©ä½™
+	}RBookInf[101];//<------------------------------è‡³å¤šè¾“å…¥99ä¸ªæ•°æ®
+struct _PressInf//<------------------------------å‡ºç‰ˆç¤¾ä¿¡æ¯ç»“æ„ä½“ 
 {
 	char PressName[100];
 	int BookQuantity;
-}PressInf[102];//<------------------------------------ÖÁ¶àÊäÈë99¸öÊı¾İ
-//¶ÔÆëº¯Êı
-void prints(char Array[],int Num)//<---------------ÓÃÀ´Êä³ö×Ö·ûÊı×éArray[],NumÊÇÊä³öµÄ×Ö·û×ÜÊı£¬²»×ãµÄÓÉ¿Õ¸ñ²¹×ã£¬ÒÔ´ïµ½ÕûÆëµÄĞ§¹û 
+}PressInf[102];//<------------------------------------è‡³å¤šè¾“å…¥99ä¸ªæ•°æ®
+//å¯¹é½å‡½æ•°
+void prints(char Array[],int Num)//<---------------ç”¨æ¥è¾“å‡ºå­—ç¬¦æ•°ç»„Array[],Numæ˜¯è¾“å‡ºçš„å­—ç¬¦æ€»æ•°ï¼Œä¸è¶³çš„ç”±ç©ºæ ¼è¡¥è¶³ï¼Œä»¥è¾¾åˆ°æ•´é½çš„æ•ˆæœ 
 {
 	printf("%s",Array);
 	int Length=strlen(Array),Remain=Num-Length;
@@ -43,38 +43,38 @@ void prints(char Array[],int Num)//<---------------ÓÃÀ´Êä³ö×Ö·ûÊı×éArray[],NumÊÇ
 		}
 	}
  } 
-//³ö°æÉç 
-void ReadPress()//¶ÁÈ¡³ö°æÉç<---------------------´Ó³ö°æÉçÎÄ¼şÖĞ¶ÁÈ¡³ö°æÉçĞÅÏ¢²¢µ¼Èë³ö°æÉçĞÅÏ¢½á¹¹ÌåÖĞ 
+//å‡ºç‰ˆç¤¾ 
+void ReadPress()//è¯»å–å‡ºç‰ˆç¤¾<---------------------ä»å‡ºç‰ˆç¤¾æ–‡ä»¶ä¸­è¯»å–å‡ºç‰ˆç¤¾ä¿¡æ¯å¹¶å¯¼å…¥å‡ºç‰ˆç¤¾ä¿¡æ¯ç»“æ„ä½“ä¸­ 
 {
 	int Count=0,PressID=0; 
 	char TMPPressID[100]={""},PressName[100]={""};
-	for(;Count<=101;Count++)//³õÊ¼»¯½á¹¹Ìå 
+	for(;Count<=101;Count++)//åˆå§‹åŒ–ç»“æ„ä½“ 
     {
     	strcpy(PressInf[Count].PressName," ");
     	PressInf[Count].BookQuantity=0;
 	}
 	Count=0;
 	FILE*  fp;
-    fp = fopen("PressInf.db", "r");//¿ªÊ¼¶ÁÈ¡³ö°æÉçÎÄ¼ş 
+    fp = fopen("PressInf.db", "r");//å¼€å§‹è¯»å–å‡ºç‰ˆç¤¾æ–‡ä»¶ 
     if (!fp)
     {
-		printf("ÎÄ¼ş´ò¿ª´íÎó£¡");
+		printf("æ–‡ä»¶æ‰“å¼€é”™è¯¯ï¼");
         return;//<-------------------------------
     }
-    strcpy(PressInf[100].PressName,"ÆäËû³ö°æÉç");//½«×îºóÒ»¸öÉèÎªdefaultÏî 
-    while(fscanf(fp,"%s%s",TMPPressID,PressName))//¶ÁÈ¡³ö°æÉçÎÄ¼ş 
+    strcpy(PressInf[100].PressName,"å…¶ä»–å‡ºç‰ˆç¤¾");//å°†æœ€åä¸€ä¸ªè®¾ä¸ºdefaulté¡¹ 
+    while(fscanf(fp,"%s%s",TMPPressID,PressName))//è¯»å–å‡ºç‰ˆç¤¾æ–‡ä»¶ 
     {
     	if(atoi(TMPPressID)==PressID){break;}
-		PressID=atoi(TMPPressID);//×ª»»ÊäÈëµÄ×Ö·ûÎªÊı×Ö 
+		PressID=atoi(TMPPressID);//è½¬æ¢è¾“å…¥çš„å­—ç¬¦ä¸ºæ•°å­— 
 		strcpy(PressInf[PressID].PressName,PressName); 
 	}
 	fclose(fp);
 }
-//¶ÁÈ¡Êı¾İ
+//è¯»å–æ•°æ®
 void DevideData(char *Readchar,char *BookName,char *Writer,char *PressNum,char *BookID,char *Prize,char *IndexNum,char *Stock) 
-{//<---------------------½«ReadcharÖĞµÄÊı¾İ·Ö¿ª£¬ ²¢ÇÒ¶ÔÒ»Ğ©»áµ¼ÖÂÒç³öµÄ´íÎó½øĞĞ·À·¶ 
+{//<---------------------å°†Readcharä¸­çš„æ•°æ®åˆ†å¼€ï¼Œ å¹¶ä¸”å¯¹ä¸€äº›ä¼šå¯¼è‡´æº¢å‡ºçš„é”™è¯¯è¿›è¡Œé˜²èŒƒ 
 	int Cnt=0,Count=0;
-	if(Readchar[Cnt]!='|'){printf("\nÊı¾İ¶ÁÈ¡³ö´í£¬ÇëÁªÏµ¹ÜÀíÔ±");return;}else{Cnt++;}//<----------
+	if(Readchar[Cnt]!='|'){printf("\næ•°æ®è¯»å–å‡ºé”™ï¼Œè¯·è”ç³»ç®¡ç†å‘˜");return;}else{Cnt++;}//<----------
 	while(Readchar[Cnt]!='|'){BookName[Count]=Readchar[Cnt];Count++;Cnt++;}Count=0;Cnt++;
 	while(Readchar[Cnt]!='|'){Writer[Count]=Readchar[Cnt];Count++;Cnt++;}Count=0;Cnt++;
 	while(Readchar[Cnt]!='|'){PressNum[Count]=Readchar[Cnt],Count++;Cnt++;}Count=0;Cnt++;
@@ -83,41 +83,41 @@ void DevideData(char *Readchar,char *BookName,char *Writer,char *PressNum,char *
 	while(Readchar[Cnt]!='|'){IndexNum[Count]=Readchar[Cnt];Count++;Cnt++;}Count=0;Cnt++;
 	while(Readchar[Cnt]!='|'){if(Readchar[Cnt]=='\0'){break;}Stock[Count]=Readchar[Cnt];Count++;Cnt++;}
 }
-void ReadBookInf ()//¶ÁÈ¡ÎÄ¼ş <-----------------------------´ÓÊé±¾ÎÄ¼şÖĞ¶ÁÈ¡Êé±¾ĞÅÏ¢²¢µ¼ÈëÊé±¾ĞÅÏ¢½á¹¹ÌåÖĞ 
+void ReadBookInf ()//è¯»å–æ–‡ä»¶ <-----------------------------ä»ä¹¦æœ¬æ–‡ä»¶ä¸­è¯»å–ä¹¦æœ¬ä¿¡æ¯å¹¶å¯¼å…¥ä¹¦æœ¬ä¿¡æ¯ç»“æ„ä½“ä¸­ 
 {
 	int Count=0;
 	char Readchar[1000]={""},TMPPressNum[5]={""},TMPPrize[5]={""},TMPStock[5]={""};
 	FILE*  fp;
-    fp = fopen("BookInf.db", "r");//´ò¿ªÎÄ¼ş 
+    fp = fopen("BookInf.db", "r");//æ‰“å¼€æ–‡ä»¶ 
     if (!fp)
     {
-		printf("ÎÄ¼ş´ò¿ª´íÎó£¡");
+		printf("æ–‡ä»¶æ‰“å¼€é”™è¯¯ï¼");
         return;//<------------------------------- 
     }
-	while(fgets(Readchar,1000,fp))//<----´ÓÎÄ¼şÖĞ»ñÈ¡ĞÅÏ¢ 
+	while(fgets(Readchar,1000,fp))//<----ä»æ–‡ä»¶ä¸­è·å–ä¿¡æ¯ 
 	{
 		if(Count>100){break;}
-		DevideData(Readchar,BookInf[Count].BookName,BookInf[Count].Writer,TMPPressNum,BookInf[Count].BookID,TMPPrize,BookInf[Count].IndexNum,TMPStock);//<--·Ö¿ªÊı¾İ ²¢´æÈëÊı×é 
+		DevideData(Readchar,BookInf[Count].BookName,BookInf[Count].Writer,TMPPressNum,BookInf[Count].BookID,TMPPrize,BookInf[Count].IndexNum,TMPStock);//<--åˆ†å¼€æ•°æ® å¹¶å­˜å…¥æ•°ç»„ 
 		BookInf[Count].Stock=atoi(TMPStock);BookInf[Count].Prize=atoi(TMPPrize);BookInf[Count].PressNum=atoi(TMPPressNum);
 		Count++;
 	}
 	fclose(fp);
 }
-void ShowPressInf()//<-----------------------------------ÏÔÊ¾³ö°æÉçĞÅÏ¢ 
+void ShowPressInf()//<-----------------------------------æ˜¾ç¤ºå‡ºç‰ˆç¤¾ä¿¡æ¯ 
 {
 	int Count=0;
 	for(;Count<100;Count++)
 	{
-		PressInf[BookInf[Count].PressNum].BookQuantity++;//¼ì²âÃ¿¸ö³ö°æÉçµÄ³ö°æÍ¼ÊéÊıÁ¿ 
+		PressInf[BookInf[Count].PressNum].BookQuantity++;//æ£€æµ‹æ¯ä¸ªå‡ºç‰ˆç¤¾çš„å‡ºç‰ˆå›¾ä¹¦æ•°é‡ 
 	} 
 	int PressID=0;
 	printf(" ########################################################################################\n");
-	printf(" ##########################################³ö°æÉç########################################\n");
+	printf(" ##########################################å‡ºç‰ˆç¤¾########################################\n");
 	printf(" ########################################################################################\n\n");
-	printf("                  ³ö°æÉç´úÂë         ³ö°æÉçÃû³Æ                ³ö°æÊéÊıÁ¿                        \n\n");
+	printf("                  å‡ºç‰ˆç¤¾ä»£ç          å‡ºç‰ˆç¤¾åç§°                å‡ºç‰ˆä¹¦æ•°é‡                        \n\n");
 	for(;PressID<99;PressID++)
 	{
-		if(strcmp(PressInf[PressID].PressName," ")==0)//¶Ô±È²é¿´½á¹¹ÌåÄÚÊÇ·ñÓĞĞÅÏ¢£¬Èç¹ûÎŞ£¬¼ÌĞø½øÈëÑ­»· 
+		if(strcmp(PressInf[PressID].PressName," ")==0)//å¯¹æ¯”æŸ¥çœ‹ç»“æ„ä½“å†…æ˜¯å¦æœ‰ä¿¡æ¯ï¼Œå¦‚æœæ— ï¼Œç»§ç»­è¿›å…¥å¾ªç¯ 
 		{
 			continue;
 		}
@@ -135,55 +135,55 @@ void ShowPressInf()//<-----------------------------------ÏÔÊ¾³ö°æÉçĞÅÏ¢
 	}
 	printf("\n ########################################################################################\n");
 }
-void ShowBookInf()//<-----------------------------------ÏÔÊ¾Í¼ÊéĞÅÏ¢ 
+void ShowBookInf()//<-----------------------------------æ˜¾ç¤ºå›¾ä¹¦ä¿¡æ¯ 
 {
 	int Count=0;
 	system("cls");
 	printf(" ########################################################################################\n");
-	printf(" ######################################ÏÖÓĞÍ¼ÊéĞÅÏ¢######################################\n");
+	printf(" ######################################ç°æœ‰å›¾ä¹¦ä¿¡æ¯######################################\n");
 	printf(" ########################################################################################\n\n");
-	printf("             Êé Ãû          ×÷ Õß    ³ö °æ Éç            Êé ºÅ            ¼Û¸ñ Ë÷Òı  ¿â´æ\n\n");
+	printf("             ä¹¦ å          ä½œ è€…    å‡º ç‰ˆ ç¤¾            ä¹¦ å·            ä»·æ ¼ ç´¢å¼•  åº“å­˜\n\n");
 	for(Count=0;Count<100;Count++)
 	{
-		if(BookInf[Count].Stock==0&&BookInf[Count].Prize==0){continue;}//´Ó½á¹¹ÌåÖĞ»ñÈ¡ĞÅÏ¢£¬²¢ÏÔÊ¾³öÀ´ 
+		if(BookInf[Count].Stock==0&&BookInf[Count].Prize==0){continue;}//ä»ç»“æ„ä½“ä¸­è·å–ä¿¡æ¯ï¼Œå¹¶æ˜¾ç¤ºå‡ºæ¥ 
 		printf("  ");prints(BookInf[Count].BookName,25);prints(BookInf[Count].Writer,8);prints(PressInf[BookInf[Count].PressNum].PressName,18);printf("ISBN");prints(BookInf[Count].BookID,13);
-		printf(" £¤%d ",BookInf[Count].Prize);prints(BookInf[Count].IndexNum,5);printf(" %d\n",BookInf[Count].Stock);
+		printf(" ï¿¥%d ",BookInf[Count].Prize);prints(BookInf[Count].IndexNum,5);printf(" %d\n",BookInf[Count].Stock);
 	}
 	printf("\n ########################################################################################\n");
 }
-void ShowSingleBookInf(int Count)//<----------------------ÏÔÊ¾µÚCount¸ö½á¹¹ÌåÖĞµÄĞÅÏ¢
+void ShowSingleBookInf(int Count)//<----------------------æ˜¾ç¤ºç¬¬Countä¸ªç»“æ„ä½“ä¸­çš„ä¿¡æ¯
 {
 	printf("  ");prints(BookInf[Count].BookName,25);prints(BookInf[Count].Writer,8);prints(PressInf[BookInf[Count].PressNum].PressName,18);printf("ISBN");prints(BookInf[Count].BookID,13);
-	printf(" £¤%d ",BookInf[Count].Prize);prints(BookInf[Count].IndexNum,5);printf(" %d\n",BookInf[Count].Stock);
+	printf(" ï¿¥%d ",BookInf[Count].Prize);prints(BookInf[Count].IndexNum,5);printf(" %d\n",BookInf[Count].Stock);
 }
-void AddBookInf()//<-----------------------Ìí¼ÓÊé±¾ĞÅÏ¢ 
+void AddBookInf()//<-----------------------æ·»åŠ ä¹¦æœ¬ä¿¡æ¯ 
 {
 	char Input[2]={""},InputName[100]={""},InputWriter[50]={""},InputBookID[20]={""},TMPPrize[20]={""},InputIndexNum[50]={""},TMPStock[20]={""},TMPPressNum[2]={""};
 	int InputPrize=0,InputStock=0,InputPressNum=0,Count=0; 
-	printf(" ######################################Ìí¼ÓÊé±¾##########################################\n");
+	printf(" ######################################æ·»åŠ ä¹¦æœ¬##########################################\n");
 	printf(" ########################################################################################\n\n");
-	printf(" ÇëÊäÈë¸ÃµÄÊéÃû³Æ:");
+	printf(" è¯·è¾“å…¥è¯¥çš„ä¹¦åç§°:");
 	scanf("%100s",InputName); 
-	printf(" ÇëÊäÈë¸ÃµÄÊéµÄ×÷ÕßÃû×Ö:");
+	printf(" è¯·è¾“å…¥è¯¥çš„ä¹¦çš„ä½œè€…åå­—:");
 	scanf("%50s",InputWriter); 
-	printf(" ÇëÊäÈë¸ÃµÄÊéµÄÊéºÅ:");
+	printf(" è¯·è¾“å…¥è¯¥çš„ä¹¦çš„ä¹¦å·:");
 	printf(" ISBN ");
 	scanf("%13s",InputBookID);
-	printf(" ÇëÊäÈë¸ÃµÄÊéµÄ¼Û¸ñ:");
+	printf(" è¯·è¾“å…¥è¯¥çš„ä¹¦çš„ä»·æ ¼:");
 	scanf("%20s",TMPPrize);
 	InputPrize=atoi(TMPPrize);
-	printf(" ÇëÊäÈë¸ÃµÄÊéµÄË÷ÒıºÅ:");
+	printf(" è¯·è¾“å…¥è¯¥çš„ä¹¦çš„ç´¢å¼•å·:");
 	scanf("%50s",InputIndexNum);
-	printf(" ÇëÊäÈë¸ÃµÄÊéµÄÊıÁ¿:");
+	printf(" è¯·è¾“å…¥è¯¥çš„ä¹¦çš„æ•°é‡:");
 	scanf("%20s",TMPStock);
-	InputStock=atoi(TMPStock);//½«×Ö·ûÊı×é×ªÎªÊı×Ö 
-	ShowPressInf();//ÏÔÊ¾Êé±¾ĞÅÏ¢ 
-	printf("ÇëÊäÈë¸ÃµÄÊé³ö°æÉçµÄ±àºÅ");
+	InputStock=atoi(TMPStock);//å°†å­—ç¬¦æ•°ç»„è½¬ä¸ºæ•°å­— 
+	ShowPressInf();//æ˜¾ç¤ºä¹¦æœ¬ä¿¡æ¯ 
+	printf("è¯·è¾“å…¥è¯¥çš„ä¹¦å‡ºç‰ˆç¤¾çš„ç¼–å·");
 	scanf("%2s",TMPPressNum);
 	InputPressNum=atoi(TMPPressNum);
 	while(strcmp(PressInf[InputPressNum].PressName," ")==0)
 	{
-		printf("¸Ã³ö°æÉç²»´æÔÚ£¬ÊÇ·ñÒªÌí¼Ó³ö°æÉç(Y/N)");//<----------------------------Ìí¼Ó³ö°æÉç 
+		printf("è¯¥å‡ºç‰ˆç¤¾ä¸å­˜åœ¨ï¼Œæ˜¯å¦è¦æ·»åŠ å‡ºç‰ˆç¤¾(Y/N)");//<----------------------------æ·»åŠ å‡ºç‰ˆç¤¾ 
 		scanf("%1s",Input);
 		if(Input[0]=='Y'||Input[0]=='y')
 		{
@@ -192,19 +192,19 @@ void AddBookInf()//<-----------------------Ìí¼ÓÊé±¾ĞÅÏ¢
 		}
 		if(Input[0]=='N'||Input[0]=='n')
 		{
-			InputPressNum=100;//Ñ¡Ôñ²»Ìí¼Óºó 
+			InputPressNum=100;//é€‰æ‹©ä¸æ·»åŠ å 
 			break;
 		}
 	}
-    FILE *fp= fopen("BookInf.db", "a");//´ò¿ªÎÄ¼ş 
+    FILE *fp= fopen("BookInf.db", "a");//æ‰“å¼€æ–‡ä»¶ 
     if (!fp)
     {
-		printf("ÎÄ¼ş´ò¿ª´íÎó£¡");
+		printf("æ–‡ä»¶æ‰“å¼€é”™è¯¯ï¼");
         return;//<-------------------------------
     }
     fprintf(fp,"|%s|%s|%d|%s|%d|%s|%d|\n",InputName,InputWriter,InputPressNum,InputBookID,InputPrize,InputIndexNum,InputStock);
     fclose(fp);
-	printf("Ìí¼Ó³É¹¦£¡");
+	printf("æ·»åŠ æˆåŠŸï¼");
 	system("pause");
 	ReadPress(); 
 	ReadBookInf();system("cls");
@@ -219,17 +219,17 @@ int AddPressInf(int InputPressNum)
 		ReadPress();
 		while(InputPressNum>=100&&InputPressNum<=0)
 		{
-			printf("ÇëÊäÈëĞÂµÄ³ö°æÉçµÄ±àºÅ(1-99)");
+			printf("è¯·è¾“å…¥æ–°çš„å‡ºç‰ˆç¤¾çš„ç¼–å·(1-99)");
 			scanf("%2s",TMPInputNum);
 			InputPressNum=atoi(TMPInputNum);
 		}
 	}
-	printf("ÇëÊäÈëĞÂµÄ³ö°æÉçµÄÃû×Ö");
+	printf("è¯·è¾“å…¥æ–°çš„å‡ºç‰ˆç¤¾çš„åå­—");
 	scanf("%100s",TMPPressName);
-	FILE *fp= fopen("PressInf.db", "a");//´ò¿ªÎÄ¼ş 
+	FILE *fp= fopen("PressInf.db", "a");//æ‰“å¼€æ–‡ä»¶ 
     if (!fp)
     {
-		printf("ÎÄ¼ş´ò¿ª´íÎó£¡");
+		printf("æ–‡ä»¶æ‰“å¼€é”™è¯¯ï¼");
         return;//<-------------------------------
     }
     fprintf(fp,"%d %s\n",InputPressNum,TMPPressName);
@@ -240,14 +240,14 @@ void DelBookInf()
 {
 	int Count=0,Status=101;
 	char InputBookID[13]={""},Input[1]={""}; 
-	printf("ÇëÊäÈëÄãÒªÉ¾³ıµÄÊéµÄ±àºÅ:ISBN "); 
+	printf("è¯·è¾“å…¥ä½ è¦åˆ é™¤çš„ä¹¦çš„ç¼–å·:ISBN "); 
 	scanf("%30s",InputBookID);
 	for(Count=0;Count<100;Count++)
 	{
 		if(strcmp(BookInf[Count].BookID,InputBookID)==0)
 		{
-			printf("ÇëÈ·ÈÏÊÇ·ñÒªÉ¾³ıÕâ±¾ÊéµÄ×ÊÁÏ(Y/N)");
-			printf("\n             Êé Ãû          ×÷ Õß    ³ö °æ Éç            Êé ºÅ            ¼Û¸ñ Ë÷Òı  ¿â´æ\n\n");
+			printf("è¯·ç¡®è®¤æ˜¯å¦è¦åˆ é™¤è¿™æœ¬ä¹¦çš„èµ„æ–™(Y/N)");
+			printf("\n             ä¹¦ å          ä½œ è€…    å‡º ç‰ˆ ç¤¾            ä¹¦ å·            ä»·æ ¼ ç´¢å¼•  åº“å­˜\n\n");
 			ShowSingleBookInf(Count);
 			scanf("%1s",Input);
 			if(Input[0]=='Y'||Input[0]=='y')
@@ -265,10 +265,10 @@ void DelBookInf()
 	}
 	system("del BookInf.db");
 	system("pause");
-	FILE *fp= fopen("BookInf.db", "a");//´ò¿ªÎÄ¼ş 
+	FILE *fp= fopen("BookInf.db", "a");//æ‰“å¼€æ–‡ä»¶ 
     if (!fp)
     {
-		printf("ÎÄ¼ş´ò¿ª´íÎó£¡");
+		printf("æ–‡ä»¶æ‰“å¼€é”™è¯¯ï¼");
         return;//<-------------------------------
     }
 	for(Count=0;Count<100;Count++)
@@ -278,7 +278,7 @@ void DelBookInf()
 		fprintf(fp,"|%s|%s|%d|%s|%d|%s|%d|\n",BookInf[Count].BookName,BookInf[Count].Writer,BookInf[Count].PressNum,BookInf[Count].BookID,BookInf[Count].Prize,BookInf[Count].IndexNum,BookInf[Count].Stock);
 	}
 	fclose(fp);
-	printf("ÏµÍ³½«ÖØÆôÒÔÉ¾³ı¸ÃÊı¾İ£¡");
+	printf("ç³»ç»Ÿå°†é‡å¯ä»¥åˆ é™¤è¯¥æ•°æ®ï¼");
 	system("pause");
 	Restart();
  } 
@@ -286,23 +286,23 @@ void ChangeBookInf()
 {
 	char InputBookID[13]={""},Input[1]={""},Readchar[1000]={""},TMPPressNum[2]={""},TMPPrize[20]={""},TMPStock[20]={""}; 
 	int Count=0;
-	printf("ÇëÊäÈëÄãÒª¸ü¸ÄµÄÊéµÄ±àºÅ:ISBN "); 
+	printf("è¯·è¾“å…¥ä½ è¦æ›´æ”¹çš„ä¹¦çš„ç¼–å·:ISBN "); 
 	scanf("%30s",InputBookID);
 	for(Count=0;Count<100;Count++)
 	{
 		if(strcmp(BookInf[Count].BookID,InputBookID)==0)
 		{
-			printf("ÇëÈ·ÈÏÊÇ·ñÒªĞŞ¸ÄÕâ±¾ÊéµÄĞÅÏ¢(Y/N)");
-			printf("\n             Êé Ãû          ×÷ Õß    ³ö °æ Éç            Êé ºÅ            ¼Û¸ñ Ë÷Òı  ¿â´æ\n\n");
+			printf("è¯·ç¡®è®¤æ˜¯å¦è¦ä¿®æ”¹è¿™æœ¬ä¹¦çš„ä¿¡æ¯(Y/N)");
+			printf("\n             ä¹¦ å          ä½œ è€…    å‡º ç‰ˆ ç¤¾            ä¹¦ å·            ä»·æ ¼ ç´¢å¼•  åº“å­˜\n\n");
 			ShowSingleBookInf(Count);
 			scanf("%1s",Input);
 			if(Input[0]=='Y'||Input[0]=='y')
 			{
-				printf("ÇëÔÚÎÄ±¾ÎÄ¼şÖĞĞŞ¸Ä²¢±£´æ£¡");
+				printf("è¯·åœ¨æ–‡æœ¬æ–‡ä»¶ä¸­ä¿®æ”¹å¹¶ä¿å­˜ï¼");
 				FILE *fpc= fopen("Result.tmp", "a");
 				fprintf(fpc,"|%s|%s|%d|%s|%d|%s|%d|\n",BookInf[Count].BookName,BookInf[Count].Writer,BookInf[Count].PressNum,BookInf[Count].BookID,BookInf[Count].Prize,BookInf[Count].IndexNum,BookInf[Count].Stock);
 				fclose(fpc);
-				printf("\nÇëÎñ±ØÔÚ±£´æºó¼ÌĞø£¡");
+				printf("\nè¯·åŠ¡å¿…åœ¨ä¿å­˜åç»§ç»­ï¼");
 				system("notepad.exe Result.tmp");
 				memset(BookInf[Count].BookName,0,sizeof(BookInf[Count].BookName));
 				memset(BookInf[Count].Writer,0,sizeof(BookInf[Count].Writer));
@@ -312,7 +312,7 @@ void ChangeBookInf()
 				FILE *fpo= fopen("Result.tmp", "r");
 				if (!fpo)
  			   {
-					printf("ÎÄ¼ş´ò¿ª´íÎó£¡");
+					printf("æ–‡ä»¶æ‰“å¼€é”™è¯¯ï¼");
   			        return;//<-------------------------------
   				}
   				fgets(Readchar,1000,fpo);
@@ -321,10 +321,10 @@ void ChangeBookInf()
 				fclose(fpo);
 				system("del Result.tmp");
 				system("del BookInf.db");
-				FILE *fp= fopen("BookInf.db", "a");//´ò¿ªÎÄ¼ş 
+				FILE *fp= fopen("BookInf.db", "a");//æ‰“å¼€æ–‡ä»¶ 
    				if (!fp)
    				{
-					printf("ÎÄ¼ş´ò¿ª´íÎó£¡");
+					printf("æ–‡ä»¶æ‰“å¼€é”™è¯¯ï¼");
    			    	return;//<-------------------------------
     			}
 				for(Count=0;Count<100;Count++)
@@ -333,7 +333,7 @@ void ChangeBookInf()
 					fprintf(fp,"|%s|%s|%d|%s|%d|%s|%d|\n",BookInf[Count].BookName,BookInf[Count].Writer,BookInf[Count].PressNum,BookInf[Count].BookID,BookInf[Count].Prize,BookInf[Count].IndexNum,BookInf[Count].Stock);
 				}
 				fclose(fp);
-				printf("ĞŞ¸ÄÍê³É£¡");
+				printf("ä¿®æ”¹å®Œæˆï¼");
 				system("pause");
 				break;
 			}else{break;}
@@ -349,12 +349,12 @@ void ManageBookInf()
 	system("cls");
 	ShowBookInf();
 	char Input[2]={""}; 
-	printf("                                  ÊäÈë<1>Ôö¼ÓÊé±¾                \n"); 
-	printf("                                 ÊäÈë<2>ĞŞ¸ÄÊé±¾ĞÅÏ¢              \n"); 
-	printf("                                  ÊäÈë<3>É¾³ıÊé±¾                 \n");
-	printf("                                 ÊäÈë<4>·µ»ØÖ÷²Ëµ¥                \n");
+	printf("                                  è¾“å…¥<1>å¢åŠ ä¹¦æœ¬                \n"); 
+	printf("                                 è¾“å…¥<2>ä¿®æ”¹ä¹¦æœ¬ä¿¡æ¯              \n"); 
+	printf("                                  è¾“å…¥<3>åˆ é™¤ä¹¦æœ¬                 \n");
+	printf("                                 è¾“å…¥<4>è¿”å›ä¸»èœå•                \n");
 	printf(" ########################################################################################\n");
-	printf("  ÇëÊäÈëÄãÏë½øĞĞµÄ²Ù×÷£º");
+	printf("  è¯·è¾“å…¥ä½ æƒ³è¿›è¡Œçš„æ“ä½œï¼š");
 	scanf("%1s",Input);
 	if(Input[0]=='1'){system("cls");AddBookInf();}else
 	if(Input[0]=='2'){ChangeBookInf();}else
@@ -370,10 +370,10 @@ void ManagePressInf()
 	printf(" ########################################################################################\n");
 	do 
 	{
-		printf("  ÇëÊäÈë³ö°æÉç±àºÅÒÔÏÔÊ¾³ö°æÉçÆìÏÂÍ¼Êé:");
+		printf("  è¯·è¾“å…¥å‡ºç‰ˆç¤¾ç¼–å·ä»¥æ˜¾ç¤ºå‡ºç‰ˆç¤¾æ——ä¸‹å›¾ä¹¦:");
 		scanf("%2s",Input);
 	}while(strcmp(PressInf[atoi(Input)].PressName," ")==0);
-	printf("\n             Êé Ãû          ×÷ Õß    ³ö °æ Éç            Êé ºÅ            ¼Û¸ñ Ë÷Òı  ¿â´æ\n\n");
+	printf("\n             ä¹¦ å          ä½œ è€…    å‡º ç‰ˆ ç¤¾            ä¹¦ å·            ä»·æ ¼ ç´¢å¼•  åº“å­˜\n\n");
 	for(Count=0;Count<100;Count++)
 	{
 		if(BookInf[Count].PressNum==atoi(Input))
@@ -389,10 +389,10 @@ void QueryWriter()//<-----------------------------------------------------------
 	ShowBookInf();
 	char Input[20]={""}; 
 	int Count=0,Count1=0;
-	printf("  ÇëÊäÈë×÷ÕßÃû³Æ:");
+	printf("  è¯·è¾“å…¥ä½œè€…åç§°:");
 	scanf("%20s",Input);
 	printf(" ########################################################################################\n");
-	printf("\n             Êé Ãû          ×÷ Õß    ³ö °æ Éç            Êé ºÅ            ¼Û¸ñ Ë÷Òı  ¿â´æ\n\n");
+	printf("\n             ä¹¦ å          ä½œ è€…    å‡º ç‰ˆ ç¤¾            ä¹¦ å·            ä»·æ ¼ ç´¢å¼•  åº“å­˜\n\n");
 	for(Count1=0;Count1<100;Count1++)
 	{
 		if(strstr(BookInf[Count1].Writer,Input)!=NULL)
@@ -403,7 +403,7 @@ void QueryWriter()//<-----------------------------------------------------------
 	}
 	if(Count==0)
 	{
-		printf("ÕÒ²»µ½¸Ã×÷ÕßµÄÊé¼®\n");
+		printf("æ‰¾ä¸åˆ°è¯¥ä½œè€…çš„ä¹¦ç±\n");
 	}
 	printf("\n ########################################################################################\n");
 	system("pause");
@@ -414,10 +414,10 @@ void QueryBookName()
 	ShowBookInf();
 	char Input[20]={""}; 
 	int Count=0,Count1=0;
-	printf("  ÇëÊäÈëÊé±¾Ãû³Æ:");
+	printf("  è¯·è¾“å…¥ä¹¦æœ¬åç§°:");
 	scanf("%20s",Input);
 	printf(" ########################################################################################\n");
-	printf("\n             Êé Ãû          ×÷ Õß    ³ö °æ Éç            Êé ºÅ            ¼Û¸ñ Ë÷Òı  ¿â´æ\n\n");
+	printf("\n             ä¹¦ å          ä½œ è€…    å‡º ç‰ˆ ç¤¾            ä¹¦ å·            ä»·æ ¼ ç´¢å¼•  åº“å­˜\n\n");
 	for(Count1=0;Count1<100;Count1++)
 	{
 		if(strstr(BookInf[Count1].BookName,Input)!=NULL)
@@ -428,7 +428,7 @@ void QueryBookName()
 	}
 	if(Count==0)
 	{
-		printf("ÕÒ²»µ½¸ÃÃû×ÖµÄÊé¼®\n");
+		printf("æ‰¾ä¸åˆ°è¯¥åå­—çš„ä¹¦ç±\n");
 	}
 	printf("\n ########################################################################################\n");
 	system("pause");
@@ -503,14 +503,14 @@ void Rank(int Sequence)
 	int Count=0;
 	system("cls");
 	printf(" ########################################################################################\n");
-	printf(" ######################################ÏÖÓĞÍ¼ÊéĞÅÏ¢######################################\n");
+	printf(" ######################################ç°æœ‰å›¾ä¹¦ä¿¡æ¯######################################\n");
 	printf(" ########################################################################################\n\n");
-	printf("             Êé Ãû          ×÷ Õß    ³ö °æ Éç            Êé ºÅ            ¼Û¸ñ Ë÷Òı  ¿â´æ\n\n");
+	printf("             ä¹¦ å          ä½œ è€…    å‡º ç‰ˆ ç¤¾            ä¹¦ å·            ä»·æ ¼ ç´¢å¼•  åº“å­˜\n\n");
 	for(Count=0;Count<100;Count++)
 	{
 		if(RBookInf[Count].Stock==0&&RBookInf[Count].Prize==0){continue;}
 		printf("  ");prints(RBookInf[Count].BookName,25);prints(RBookInf[Count].Writer,8);prints(PressInf[RBookInf[Count].PressNum].PressName,18);printf("ISBN");prints(RBookInf[Count].BookID,13);
-		printf(" £¤%d ",RBookInf[Count].Prize);prints(RBookInf[Count].IndexNum,5);printf(" %d\n",RBookInf[Count].Stock);
+		printf(" ï¿¥%d ",RBookInf[Count].Prize);prints(RBookInf[Count].IndexNum,5);printf(" %d\n",RBookInf[Count].Stock);
 	}
 	printf("\n ########################################################################################\n");
  } 
@@ -529,9 +529,9 @@ void RankBookInf()
 	for(;;)
 	{
 		char Input[1]={""}; 
-		printf("    <1>Èë¿âÈÕÆÚÉıĞò  <2>ÊéºÅÉıĞò  <3>ÊéºÅ½µĞò  <4>¼Û¸ñÉıĞò  <5>¼Û¸ñ½µĞò  <6>·µ»ØÖ÷½çÃæ ");
+		printf("    <1>å…¥åº“æ—¥æœŸå‡åº  <2>ä¹¦å·å‡åº  <3>ä¹¦å·é™åº  <4>ä»·æ ¼å‡åº  <5>ä»·æ ¼é™åº  <6>è¿”å›ä¸»ç•Œé¢ ");
 		printf("\n ########################################################################################\n");
-		printf("\n\nÇëÊäÈëÄãÒª½øĞĞµÄ²Ù×÷£º") ;
+		printf("\n\nè¯·è¾“å…¥ä½ è¦è¿›è¡Œçš„æ“ä½œï¼š") ;
 		scanf("%1s",&Input);
 		if(Input[0]=='1'){system("cls");ReadBookInf();ShowBookInf();RankBookInf();}else
 		if(Input[0]=='2'){system("cls");Rank(0);}else
@@ -544,25 +544,25 @@ void RankBookInf()
 void OutputExcel()
 {
 	printf("\n ########################################################################################\n");
-	printf("      ÕıÔÚµ¼³ö²¢´ò¿ªExcel");
+	printf("      æ­£åœ¨å¯¼å‡ºå¹¶æ‰“å¼€Excel");
 	system("del Output.csv");
 	system("cls");
 	FILE* fp;
-    fp = fopen("Output.csv", "a");//´ò¿ªÎÄ¼ş 
+    fp = fopen("Output.csv", "a");//æ‰“å¼€æ–‡ä»¶ 
     if (!fp)
     {
-		printf("µ¼³öÊ§°Ü£¡");
+		printf("å¯¼å‡ºå¤±è´¥ï¼");
         return;//<-------------------------------
     }
     int Count=0;
-    fprintf(fp,"ÊéÃû,×÷Õß,³ö°æÉç,ÊéºÅ,¼Û¸ñ,Ë÷Òı,¿â´æ\n");
+    fprintf(fp,"ä¹¦å,ä½œè€…,å‡ºç‰ˆç¤¾,ä¹¦å·,ä»·æ ¼,ç´¢å¼•,åº“å­˜\n");
 	for(;Count<100;Count++)
 	{
 		if(BookInf[Count].PressNum==0&&BookInf[Count].Stock==0){continue;}
 		fprintf(fp,"%s,%s,%s,%s,%d,%s,%d\n",BookInf[Count].BookName,BookInf[Count].Writer,PressInf[BookInf[Count].PressNum].PressName,BookInf[Count].BookID,BookInf[Count].Prize,BookInf[Count].IndexNum,BookInf[Count].Stock);
 	}
 	fclose(fp);
-	printf("µ¼³öÍê³É£¡");
+	printf("å¯¼å‡ºå®Œæˆï¼");
 	system("pause");
 	system("start Output.csv");
 	system("cls");
