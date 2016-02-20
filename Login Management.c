@@ -3,9 +3,9 @@
 #include<ctype.h> 
 #include <string.h>
 #include <windows.h>
-//ÉùÃ÷È«¾Ö±äÁ¿ 
-int Authority=-1;//ÖµÎª1ÎªÆÕÍ¨ÓÃ»§£¬Îª2Îª¹ÜÀíÔ±ÕË»§ 
-//ÉùÃ÷º¯Êı
+//å£°æ˜å…¨å±€å˜é‡ 
+int Authority=-1;//å€¼ä¸º1ä¸ºæ™®é€šç”¨æˆ·ï¼Œä¸º2ä¸ºç®¡ç†å‘˜è´¦æˆ· 
+//å£°æ˜å‡½æ•°
 int CheckInputNumber(char *Input);
 int IndexPage();
 int LoginConfirm();
@@ -18,7 +18,7 @@ int DelUser(int Number);
 
 //Public Section 
 
-int CheckInputNumber(char *Input)//È·¶¨È«²¿ÎªÊı×Öºó·µ»ØÊı×ÖµÄintÖµ£¬·ñÔò·µ»Ø-1 
+int CheckInputNumber(char *Input)//ç¡®å®šå…¨éƒ¨ä¸ºæ•°å­—åè¿”å›æ•°å­—çš„intå€¼ï¼Œå¦åˆ™è¿”å›-1 
 {
 	int Output=0,LengthInput=0,Count=0;
 	if(isdigit(*Input)==0)
@@ -54,18 +54,18 @@ int IndexPage()
 	system("cls");
 	char Input='\0';
 	printf(" ########################################################################################\n");
-	printf(" ######################################Í¼Êé¹ÜÀíÏµÍ³######################################\n");
+	printf(" ######################################å›¾ä¹¦ç®¡ç†ç³»ç»Ÿ######################################\n");
 	printf(" ########################################################################################\n\n");
-	printf("                                    ÊäÈë<1>ÒÔ¹ÜÀíÍ¼Êé                   \n\n");
-	printf("                                  ÊäÈë<2>²é¿´Í¼Êé³ö°æÉç               \n\n");
-	printf("                                  ÊäÈë<3>¶Ô×÷Õß½øĞĞ²éÑ¯                  \n\n");
-	printf("                                  ÊäÈë<4>¶ÔÊéÃû½øĞĞ²éÑ¯                  \n\n");
-	printf("                                   ÊäÈë<5>²é¿´Í¼ÊéÁĞ±í               \n\n");
-	printf("                                   ÊäÈë<6>µ¼³öÍ¼ÊéÊı¾İ                \n\n");
-	printf("                                     ÊäÈë<7>¹ÜÀíÕË»§                    \n\n");
-	printf("                                   ÊäÈë<8>ÍË³ö¹ÜÀíÏµÍ³                   \n\n");
+	printf("                                    è¾“å…¥<1>ä»¥ç®¡ç†å›¾ä¹¦                   \n\n");
+	printf("                                  è¾“å…¥<2>æŸ¥çœ‹å›¾ä¹¦å‡ºç‰ˆç¤¾               \n\n");
+	printf("                                  è¾“å…¥<3>å¯¹ä½œè€…è¿›è¡ŒæŸ¥è¯¢                  \n\n");
+	printf("                                  è¾“å…¥<4>å¯¹ä¹¦åè¿›è¡ŒæŸ¥è¯¢                  \n\n");
+	printf("                                   è¾“å…¥<5>æŸ¥çœ‹å›¾ä¹¦åˆ—è¡¨               \n\n");
+	printf("                                   è¾“å…¥<6>å¯¼å‡ºå›¾ä¹¦æ•°æ®                \n\n");
+	printf("                                     è¾“å…¥<7>ç®¡ç†è´¦æˆ·                    \n\n");
+	printf("                                   è¾“å…¥<8>é€€å‡ºç®¡ç†ç³»ç»Ÿ                   \n\n");
 	printf("########################################################################################\n\n");
-	printf("\n\nÇëÊäÈëÄãÒª½øĞĞµÄ²Ù×÷£º") ;
+	printf("\n\nè¯·è¾“å…¥ä½ è¦è¿›è¡Œçš„æ“ä½œï¼š") ;
 	scanf("%1s",&Input);
 	if(Input=='1'){system("cls");ManageBookInf();}else
 	if(Input=='2'){system("cls");ManagePressInf();}else
@@ -115,14 +115,14 @@ void LoginReset()
 int ChangePassword(int Number)
 {
 	int LengthText=0,Count=0,CountUser=0,CountPassword=0,ForCount1=0,ForCount2=0,Type=0,Count1=0,Count2=0,Count3=0;
-	printf("ÇëÊäÈë¸ÃÕË»§µÄĞÂÃÜÂë(³¤¶ÈÎª6-15)£º");
+	printf("è¯·è¾“å…¥è¯¥è´¦æˆ·çš„æ–°å¯†ç (é•¿åº¦ä¸º6-15)ï¼š");
 	char AccountText[20000]={""},AccountUser[1000][20]={""},AccountPassword[1000][20]={""},InputPassword[20]={""};
 	scanf("%17s",InputPassword);
 	FILE *fp=fopen("logFile.dat","rb");
 	if(!fp)
 	{
 		fclose(fp);
-		printf("È¨ÏŞÏµÍ³³öÏÖÎÊÌâ£¬ÇëÖØĞÂÅäÖÃ£¬");
+		printf("æƒé™ç³»ç»Ÿå‡ºç°é—®é¢˜ï¼Œè¯·é‡æ–°é…ç½®ï¼Œ");
 		system("pause");
 		IndexPage();
 	}
@@ -167,7 +167,7 @@ int ChangePassword(int Number)
 	if(!rfp)
 	{
 		fclose(rfp);
-		printf("È¨ÏŞÏµÍ³³öÏÖÎÊÌâ£¬ÇëÖØĞÂÅäÖÃ£¬");
+		printf("æƒé™ç³»ç»Ÿå‡ºç°é—®é¢˜ï¼Œè¯·é‡æ–°é…ç½®ï¼Œ");
 		system("pause");
 		IndexPage();
 	}
@@ -194,17 +194,17 @@ int CreatAccount()
 	if(!fp)
 	{
 		fclose(fp);
-		printf("È¨ÏŞÏµÍ³³öÏÖÎÊÌâ£¬ÇëÖØĞÂÅäÖÃ£¬");
+		printf("æƒé™ç³»ç»Ÿå‡ºç°é—®é¢˜ï¼Œè¯·é‡æ–°é…ç½®ï¼Œ");
 		system("pause");
 		IndexPage();
 	}
 	system("cls");
-	printf("ÇëÊäÈëĞÂµÄÓÃ»§Ãû(³¤¶È3-10Î»)£º");
+	printf("è¯·è¾“å…¥æ–°çš„ç”¨æˆ·å(é•¿åº¦3-10ä½)ï¼š");
 	scanf("%15s",Username);
-	printf("ÇëÊäÈëĞÂµÄÃÜÂë(³¤¶È6-15Î»)£º");
+	printf("è¯·è¾“å…¥æ–°çš„å¯†ç (é•¿åº¦6-15ä½)ï¼š");
 	scanf("%17s",Password);
 	fprintf(fp,"%s#%s*",Username,Password);
-	printf("´´½¨³É¹¦£¡");
+	printf("åˆ›å»ºæˆåŠŸï¼");
 	fclose(fp);
 	system("pause"); 
 	ReadAccount(); 
@@ -217,7 +217,7 @@ int DelUser(int Number)
 	if(!fp)
 	{
 		fclose(fp);
-		printf("È¨ÏŞÏµÍ³³öÏÖÎÊÌâ£¬ÇëÖØĞÂÅäÖÃ£¬");
+		printf("æƒé™ç³»ç»Ÿå‡ºç°é—®é¢˜ï¼Œè¯·é‡æ–°é…ç½®ï¼Œ");
 		system("pause");
 		IndexPage();
 	}
@@ -262,7 +262,7 @@ int DelUser(int Number)
 	if(!rfp)
 	{
 		fclose(rfp);
-		printf("È¨ÏŞÏµÍ³³öÏÖÎÊÌâ£¬ÇëÖØĞÂÅäÖÃ£¬");
+		printf("æƒé™ç³»ç»Ÿå‡ºç°é—®é¢˜ï¼Œè¯·é‡æ–°é…ç½®ï¼Œ");
 		system("pause");
 		IndexPage();
 	}
@@ -286,7 +286,7 @@ int ReadAccount()
 {
 	if(Authority!=1)
 	{
-		printf("ÄãµÄÈ¨ÏŞ²»×ã£¬ÎŞ·¨¸ü¸Ä´ËÉèÖÃ£¬");
+		printf("ä½ çš„æƒé™ä¸è¶³ï¼Œæ— æ³•æ›´æ”¹æ­¤è®¾ç½®ï¼Œ");
 		system("pause");
 		IndexPage();
 	}
@@ -296,7 +296,7 @@ int ReadAccount()
 	if(!fp)
 	{
 		fclose(fp);
-		printf("È¨ÏŞÏµÍ³³öÏÖÎÊÌâ£¬ÇëÖØĞÂÅäÖÃ£¬");
+		printf("æƒé™ç³»ç»Ÿå‡ºç°é—®é¢˜ï¼Œè¯·é‡æ–°é…ç½®ï¼Œ");
 		system("pause");
 		IndexPage();
 	}
@@ -338,30 +338,30 @@ int ReadAccount()
 	int a=1,b=0,retnumber=0,OperateType=0;
 	char number[4]={""},Operate[2]={""},InputType='\0';
 	printf("\n\n\t\t\t#####################################################\n");
-	printf("\t\t\t################### ÕË »§ ¹Ü Àí #####################\n");
+	printf("\t\t\t################### è´¦ æˆ· ç®¡ ç† #####################\n");
 	printf("\t\t\t#####################################################\n");
-	printf("\n\t\t\t     ±àºÅ                  ÓÃ»§Ãû        ÃÜÂë");
+	printf("\n\t\t\t     ç¼–å·                  ç”¨æˆ·å        å¯†ç ");
 	for(;a<=(Count1-1);a++,b++)
 	{
-		printf("\n\t\t\t    Ğò ºÅ %d£º¡¤¡¤¡¤¡¤¡¤¡¤¡¤%s        %s",a,AccountUser[b],AccountPassword[a]);
+		printf("\n\t\t\t    åº å· %dï¼šÂ·Â·Â·Â·Â·Â·Â·%s        %s",a,AccountUser[b],AccountPassword[a]);
 		if(AccountUser[b]==""||AccountPassword[a]=="")
 		{
 			break;
 		}
 	}
 	printf("\n\n\t\t\t#####################################################\n\n\n\n");
-	printf("ÊäÈë<a>¸ü¸ÄÄ³¸öÕË»§ÉèÖÃ\tÊäÈë<b>Ìí¼ÓÕË»§\tÊäÈë<c>·µ»ØÖ÷½çÃæ\n\n");
+	printf("è¾“å…¥<a>æ›´æ”¹æŸä¸ªè´¦æˆ·è®¾ç½®\tè¾“å…¥<b>æ·»åŠ è´¦æˆ·\tè¾“å…¥<c>è¿”å›ä¸»ç•Œé¢\n\n");
 	scanf("%1s",&InputType);
 	if(InputType=='a')
 	{
-	printf("ÇëÊäÈëÒ»¸öÕË»§±àºÅ£¬°´»Ø³µ½øĞĞ¸ü¸Ä:");
+	printf("è¯·è¾“å…¥ä¸€ä¸ªè´¦æˆ·ç¼–å·ï¼ŒæŒ‰å›è½¦è¿›è¡Œæ›´æ”¹:");
 	for(;;)
 	{
 		scanf("%3s",number);
 		retnumber=CheckInputNumber(number);  
 		if(retnumber>(a))
 		{
-			printf("±§Ç¸£¬Ã»ÓĞ¸ÃÕËºÅ\n");
+			printf("æŠ±æ­‰ï¼Œæ²¡æœ‰è¯¥è´¦å·\n");
 			system("pause"); 
 			ReadAccount();
 		}
@@ -371,8 +371,8 @@ int ReadAccount()
 	}
 	}
 	system("cls");
-	printf("ÄãÑ¡ÔñµÄÕË»§ÃûÎª£º%s\n\n\n\n\n\t\t\t\t#####################################\n\n\t\t\t\t\tÊäÈë<1>¸ü¸Ä¸ÃÕË»§µÄÃÜÂë\n\t\t\t\t\tÊäÈë<2>É¾³ı¸ÃÕË»§\n\t\t\t\t\tÊäÈë<3>·µ»Ø¹ÜÀí½çÃæ\n\n\t\t\t\t#####################################\n",AccountUser[retnumber-1]);
-	printf("\n\nÇëÊäÈëÄãÒª½øĞĞµÄ²Ù×÷:");
+	printf("ä½ é€‰æ‹©çš„è´¦æˆ·åä¸ºï¼š%s\n\n\n\n\n\t\t\t\t#####################################\n\n\t\t\t\t\tè¾“å…¥<1>æ›´æ”¹è¯¥è´¦æˆ·çš„å¯†ç \n\t\t\t\t\tè¾“å…¥<2>åˆ é™¤è¯¥è´¦æˆ·\n\t\t\t\t\tè¾“å…¥<3>è¿”å›ç®¡ç†ç•Œé¢\n\n\t\t\t\t#####################################\n",AccountUser[retnumber-1]);
+	printf("\n\nè¯·è¾“å…¥ä½ è¦è¿›è¡Œçš„æ“ä½œ:");
 	scanf("%1s",Operate); 
 	if(Operate[0]=='1'){ChangePassword(retnumber-1);}else
 	if(Operate[0]=='2'){DelUser(retnumber-1);}else
